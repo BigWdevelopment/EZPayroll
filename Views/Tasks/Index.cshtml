@@ -1,0 +1,109 @@
+﻿@model IEnumerable<EZPayroll.MVC.Models.Tasks>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<br>
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Tasks</h3><br />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="card-tools">
+                        <!-- Buttons, labels, and many other things can be placed here! -->
+                        <!-- Here is a label for example -->
+                        <a asp-action="Create" class="btn btn-info form-control text-white">Create Tasks</a>
+                    </div>
+                </div>
+
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <table id="taskTbl" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Task Name
+                                </th>
+                                <th>
+                                  Start Date
+                                </th>
+                                <th>
+                                   End Date
+                                </th>
+                                <th>Commands</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaskName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StartDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EndDate)
+                                </td>                               
+                                <td>
+
+                                    <a asp-action="Edit" class='btn btn-success text-white' asp-route-id="@item.TaskId">Edit</a> |
+                                    <a class='btn btn-danger text-white' onclick="Delete('/Tasks/Delete/' + @item.TaskId)">Delete</a>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
+<script>
+
+    var dataTable;
+    $(document).ready(function () {
+        loadDataTable();
+    });
+    function loadDataTable() {
+        dataTable = $('#taskTbl').DataTable({
+            "paging": true,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        }); }
+    function Delete(url) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    type: "DELETE",
+                    url: url,
+                    success: function (data) {
+                        if (!data.success) {
+                            toastr.error(data.message);
+                        } else {
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+</script>

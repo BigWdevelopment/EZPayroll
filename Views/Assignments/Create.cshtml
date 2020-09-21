@@ -1,0 +1,50 @@
+﻿@model EZPayroll.MVC.ViewModels.AssignmentsViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Assign</h3>
+                    </div><br />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    @if (Model != null)
+                    {
+
+
+                        <form asp-action="Create" class="offset-4 col-4" role="form">
+
+                            <div class="form-group">
+                                <label class="control-label">Employee</label>
+                                <select asp-for="Assignee.EmpId" asp-items="Model.Employees(0)" class="form-control"><option value="">Select...</option></select>
+                                <span asp-validation-for="Assignee.EmpId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Task</label>
+                                <select asp-for="Assignee.TaskId" asp-items="Model.Tasks(0)" class="form-control"><option value="">Select...</option></select>
+                                <span asp-validation-for="Assignee.TaskId" class="text-danger"></span>
+                            </div>
+                            <div class="card-footer">
+                                <a asp-action="Index" class="btn btn-default">  Back to List</a>
+                                <button asp-action="Create" class="btn btn-info text-white float-right">Create</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div>
+</section>

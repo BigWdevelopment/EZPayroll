@@ -1,0 +1,56 @@
+﻿@model EZPayroll.MVC.ViewModels.EmployeesHoursViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Capture Hours</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="Create" class="offset-4 col-4" role="form">
+                        <input type="hidden" asp-for="TempEmpId" />               
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label class="control-label">Employee</label>
+                            <input asp-for="EmployeeName" class="form-control" readonly="readonly" />
+                        </div>
+                        <div class="form-group">
+                            <label  class="control-label">Tasks</label>
+                            <select asp-for="EmployeeHours.TaskId" asp-items="Model.TaskList" class="form-control"><option value="">Select...</option></select>
+                            <span asp-validation-for="EmployeeHours.TaskId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmployeeHours.Date" class="control-label"></label>
+                            <input asp-for="EmployeeHours.Date" class="form-control" />
+                            <span asp-validation-for="EmployeeHours.Date" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="EmployeeHours.Hours" class="control-label"></label>
+                            <input asp-for="EmployeeHours.Hours" class="form-control" min="1" max="12" />
+                            <span asp-validation-for="EmployeeHours.Hours" class="text-danger"></span>
+                        </div>
+                        <div class="card-footer">
+                            <a  asp-controller="Employees" asp-action="Index" class="btn btn-default">  Back to List</a>
+                            <button asp-action="Create" class="btn btn-info text-white float-right">Create</button>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div>
+</section>

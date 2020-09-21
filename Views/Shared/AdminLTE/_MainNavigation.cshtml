@@ -1,0 +1,85 @@
+﻿@using static EZPayroll.MVC.Helpers.NavigationIndicatorHelper;
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/home/index" class="brand-link">
+        <img src="~/img/logo.png" alt="NoLogo" class="brand-image img-circle elevation-3" >
+        <span class="brand-text font-weight-light">EZPayroll</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">  
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item has-treeview ">
+                    <a class="nav-link @Url.MakeActiveClass("Roles","Index")">
+                        <i class="nav-icon fas fa-money-check"></i>
+                        <p>Roles<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="Roles" asp-action="Index" class="nav-link @Url.MakeActiveClass("Roles","Index") ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Roles</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>               
+                <li class="nav-item has-treeview">
+                    <a class="nav-link @Url.MakeActiveClass("Employees","Index")">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Employees<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="Employees" asp-action="Index" class="nav-link @Url.MakeActiveClass("Employees","index")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Employees</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a class="nav-link @Url.MakeActiveClass("Tasks","Index")">
+                        <i class="nav-icon fas fa-tasks"></i>
+                        <p>Tasks<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="Tasks" asp-action="Index" class="nav-link @Url.MakeActiveClass("Tasks","Index") ">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Tasks</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Assignments" asp-action="Index" class="nav-link @Url.MakeActiveClass("assignments","index")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Assignments</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a class="nav-link @Url.MakeActiveClass("EmployeeHours","Search")">
+                        <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                        <p>Salaries<i class="fas fa-angle-left right"></i></p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a asp-controller="EmployeeHours" asp-action="Search" class="nav-link @Url.MakeActiveClass("EmployeeHours","Search")">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Employee Hours</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

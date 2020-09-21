@@ -1,0 +1,130 @@
+﻿@model EZPayroll.MVC.ViewModels.EmployeesHoursSearchViewModel
+
+
+@{
+    ViewData["Title"] = "Employee Salary Report";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Search</h3>
+                    </div><br />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    @if (Model != null)
+                    {
+
+                        <form asp-action="Search" role="form">
+                            @Html.AntiForgeryToken()
+
+                            <hr />
+                            <table style="width:100%;">
+                                <tr>
+                                    <th>Employees</th>
+                                    <td>
+
+                                        <select asp-for="EmpId" asp-items="Model.EmployeeList" class="form-control"><option value="">Select...</option></select>
+                                        <span asp-validation-for="EmpId" class="text-danger"></span>
+
+                                    </td>
+                                    <th>Start Date</th>
+                                    <td>
+                                        <input asp-for="StartDate" class="form-control" />
+                                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                                    </td>
+                                    <th>End Date</th>
+                                    <td>
+                                        <input asp-for="EndDate" class="form-control" />
+                                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                                    </td>
+
+                                </tr>
+                            </table>
+                            <div class="card-footer">
+                                @if (@Model.Total != 0)
+                                {
+                                    <label><em>Total due :</em>R @Model.Total</label>
+                                }
+                                <button asp-action="Search" class="btn btn-primary  float-right">Search</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+                <!-- /.card -->
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="resultTbl" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Task Name</th>
+                                    <th>Total</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {                              
+                                @if (Model.SearchList != null)
+                                {
+
+
+                                    @foreach (var item in Model.SearchList)
+                                    {
+                                        <tr>
+                                            @try
+                                            {
+
+
+                                                <td>@Model.GetTaskName(item.TaskId)</td>
+
+                                                <td>@item.Total.ToString()</td>
+                                                <td>@item.Date.ToShortDateString()</td>
+
+
+                                            }
+                                            catch (Exception)
+                                            {
+
+                                                <p style="background-color:red">Record Corrupt</p>
+                                            }
+
+                                        </tr>
+
+                                    }}  }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div>
+</section>
+<script>
+
+    var dataTable;
+    $(document).ready(function () {
+        loadDataTable();
+    });
+    function loadDataTable() {
+        dataTable = $('#resultTbl').DataTable({          
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+        });
+    }
+
+</script>

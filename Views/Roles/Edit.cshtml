@@ -1,0 +1,49 @@
+﻿@model EZPayroll.MVC.Models.Roles
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/AdminLTE/_Layout.cshtml";
+}
+
+<br />
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Edit Role</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form asp-action="Create" class="offset-4 col-4" role="form">
+                        <input type="hidden" asp-for="RoleId" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="control-label">Role Name</label>
+                                <input asp-for="RoleName" class="form-control" />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group row">
+                                <label class="control-label">Rate Per Hour</label>
+                                <input asp-for="RoleRate" class="form-control" />
+                                <span asp-validation-for="RoleRate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <a asp-action="Index" class="btn btn-default">  Back to List</a>
+                            <button asp-action="Edit" class="btn btn-info text-white float-right">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+            <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+    </div><!-- /.container-fluid -->
+</section>
