@@ -25,9 +25,20 @@ namespace EZPayroll.MVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+#if DEBUG
             services.AddDbContext<SystemDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection")));
+
+#elif DEV
+            services.AddDbContext<SystemDbContext>(options =>
+                           options.UseSqlServer(
+                               Configuration.GetConnectionString("ServerDevConnection")));
+#elif RELEASE
+services.AddDbContext<SystemDbContext>(options =>
+               options.UseSqlServer(
+                   Configuration.GetConnectionString("ServerConnection")));
+#endif
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }
 
